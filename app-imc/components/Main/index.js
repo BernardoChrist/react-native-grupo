@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
+  ImageBackground,
 } from "react-native";
 import React, { useState } from "react";
 
@@ -28,27 +29,32 @@ export default function Main() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Preencha a altura e o peso</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Altura"
-        value={altura}
-        onChangeText={(text) => setAltura(text)}
-        // keyboardType="decimal-pad"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Peso"
-        value={peso}
-        onChangeText={(text) => setPeso(text)}
-        // keyboardType="decimal-pad"
-      />
-      <TouchableOpacity style={styles.addButton} onPress={calcularIMC}>
-        <Text style={styles.buttonText}>{botao}</Text>
-      </TouchableOpacity>
-      <Text style={styles.textoresult}>{resultado}</Text>
-    </View>
+    <ImageBackground
+      source={require("../../assets/img.png")}
+      style={styles.backgroundImage}
+    >
+      <View style={styles.container}>
+        <Text style={styles.text}>Preencha a altura e o peso</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Altura"
+          value={altura}
+          onChangeText={(text) => setAltura(text)}
+          // keyboardType="decimal-pad"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Peso"
+          value={peso}
+          onChangeText={(text) => setPeso(text)}
+          // keyboardType="decimal-pad"
+        />
+        <TouchableOpacity style={styles.addButton} onPress={calcularIMC}>
+          <Text style={styles.buttonText}>{botao}</Text>
+        </TouchableOpacity>
+        <Text style={styles.textoresult}>{resultado}</Text>
+      </View>
+    </ImageBackground>
   );
 }
 
@@ -94,5 +100,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
 
     height: 40,
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover", // ou 'stretch'
+    justifyContent: "center",
   },
 });
