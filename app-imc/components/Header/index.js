@@ -13,13 +13,15 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: "#3498db",
     padding: 15,
-
+    width: 450,
     alignItems: "center",
-    marginTop: 40,
+    marginTop: 45,
+    borderWidth: 2,
+    borderColor: "#033B86",
   },
   headerText: {
     fontSize: 25,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: "#033B86",
   },
 });

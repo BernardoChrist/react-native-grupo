@@ -9,7 +9,7 @@ export default function App() {
     //   <Text>Open up App.js to start working on your app!</Text>
     //   <StatusBar style="auto" />
     // </View>
-    <View>
+    <View style={styles.container}>
       <Header />
       <Main />
     </View>
@@ -19,7 +19,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#add8e6",
     alignItems: "center",
     justifyContent: "center",
   },
