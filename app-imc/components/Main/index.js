@@ -65,10 +65,12 @@ export default function Main() {
       <TouchableOpacity style={styles.addButton} onPress={calcularIMC}>
         <Text style={styles.buttonText}>{botao}</Text>
       </TouchableOpacity>
-      <View style={styles.resultado}>
-        <Text style={styles.textoresult}>{resultado}</Text>
-        <Text style={styles.textoresult}>{textinho}</Text>
-      </View>
+      {resultado != null && (
+        <View style={styles.resultado}>
+          <Text style={styles.textoresult}>{resultado}</Text>
+          <Text style={styles.textoresult}>{textinho}</Text>
+        </View>
+      )}
     </View>
   );
 }
