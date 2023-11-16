@@ -9,6 +9,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import React, { useState } from "react";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ActionModal from "../../components/ActionModal";
 
 export default function Home() {
@@ -18,7 +19,10 @@ export default function Home() {
   const [mostrarModal, setMostrarModal] = useState(false);
 
   const calcular = () => {
-    if (precoAlcool && precoGasolina) {
+    if (!precoAlcool.trim() || !precoGasolina.trim()) {
+      alert("Por favor, preencha ambos os campos");
+      return;
+    } else if (precoAlcool && precoGasolina) {
       const resultadoCalculo =
         parseFloat(precoAlcool) / parseFloat(precoGasolina);
 
@@ -40,66 +44,76 @@ export default function Home() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.viewImage}>
-        <Image
-          source={require("../../assets/gasolina1.png")}
-          style={{ width: 125, height: 125 }}
-        />
-      </View>
-      <Text style={styles.titulo}>Qual melhor opção?</Text>
-
-      <View style={styles.main}>
-        <View style={styles.inputsMain}>
-          <Text style={styles.textos}>Álcool (preço por litro)</Text>
-          <TextInput
-            placeholder="Inserir preço do álcool"
-            keyboardType="numeric"
-            value={precoAlcool}
-            onChangeText={(text) => setPrecoAlcool(text)}
-            placeholderTextColor="#727171"
-            style={{
-              height: 50,
-              width: 250,
-              borderColor: "gray",
-              borderWidth: 2,
-              borderRadius: 20,
-              marginBottom: 30,
-              paddingHorizontal: 10,
-              fontSize: 15,
-            }}
-          />
-          <Text style={styles.textos}>Gasolina (preço por litro)</Text>
-          <TextInput
-            placeholder="Inserir preço da gasolina"
-            keyboardType="numeric"
-            value={precoGasolina}
-            onChangeText={(text) => setPrecoGasolina(text)}
-            placeholderTextColor="#727171"
-            style={{
-              height: 50,
-              width: 250,
-              borderColor: "gray",
-              borderWidth: 2,
-              borderRadius: 20,
-              marginBottom: 10,
-              paddingHorizontal: 10,
-              fontSize: 15,
-            }}
+      <KeyboardAwareScrollView
+        contentContainerStyle={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        scrollEnabled={true}
+      >
+        <View style={styles.viewImage}>
+          <Image
+            source={require("../../assets/gasolina1.png")}
+            style={{ width: 125, height: 125 }}
           />
         </View>
+        <Text style={styles.titulo}>Qual melhor opção?</Text>
 
-        <TouchableOpacity onPress={calcular} style={styles.botao}>
-          <Text style={styles.textoBotao}>Calcular</Text>
-        </TouchableOpacity>
-      </View>
-      <Modal visible={mostrarModal} transparent={true}>
-        <ActionModal
-          calcularNovamente={calcularNovamente}
-          resultado={resultado}
-          precoAlcool={precoAlcool}
-          precoGasolina={precoGasolina}
-        />
-      </Modal>
+        <View style={styles.main}>
+          <View style={styles.inputsMain}>
+            <Text style={styles.textos}>Álcool (preço por litro)</Text>
+            <TextInput
+              placeholder="Inserir preço do álcool"
+              keyboardType="numeric"
+              value={precoAlcool}
+              onChangeText={(text) => setPrecoAlcool(text)}
+              placeholderTextColor="#727171"
+              style={{
+                height: 50,
+                width: 250,
+                borderColor: "gray",
+                borderWidth: 2,
+                borderRadius: 20,
+                marginBottom: 30,
+                paddingHorizontal: 10,
+                fontSize: 15,
+              }}
+            />
+            <Text style={styles.textos}>Gasolina (preço por litro)</Text>
+            <TextInput
+              placeholder="Inserir preço da gasolina"
+              keyboardType="numeric"
+              value={precoGasolina}
+              onChangeText={(text) => setPrecoGasolina(text)}
+              placeholderTextColor="#727171"
+              style={{
+                height: 50,
+                width: 250,
+                borderColor: "gray",
+                borderWidth: 2,
+                borderRadius: 20,
+                marginBottom: 10,
+                paddingHorizontal: 10,
+                fontSize: 15,
+              }}
+            />
+          </View>
+
+          <TouchableOpacity onPress={calcular} style={styles.botao}>
+            <Text style={styles.textoBotao}>Calcular</Text>
+          </TouchableOpacity>
+        </View>
+        <Modal visible={mostrarModal} transparent={true}>
+          <ActionModal
+            calcularNovamente={calcularNovamente}
+            resultado={resultado}
+            precoAlcool={precoAlcool}
+            precoGasolina={precoGasolina}
+          />
+        </Modal>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 }
@@ -116,7 +130,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 25,
     marginBottom: 25,
     width: 200,
     height: 200,
