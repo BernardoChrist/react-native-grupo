@@ -6,7 +6,7 @@ export default function Login() {
     <SafeAreaView style={styles.container}>
       <View style={styles.viewImage}>
         <Image
-          source={require("../../assets/serrafylogo.png")}
+          source={require("../../../assets/serrafylogo.png")}
           style={{ width: 125, height: 125 }}
         />
       </View>

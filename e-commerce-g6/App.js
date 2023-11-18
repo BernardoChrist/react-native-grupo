@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Login from "./src/Pages/Login";
+import Musicas from "./src/Pages/Musicas";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Login />
+      <Musicas />
     </View>
   );
 }
